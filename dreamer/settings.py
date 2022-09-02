@@ -14,6 +14,7 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 from decouple import config
+from django.conf.global_settings import DATABASES
 from django.contrib import messages
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-if os.getcwd() == 'prod':
+if os.environ.get('prod') == 1:
     DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dreamer-shop.herokuapp.com']
@@ -85,20 +86,9 @@ WSGI_APPLICATION = 'dreamer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-if os.environ.get('prod') == 1:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config()
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'dreamer',
-            'USER': 'postgres',
-            'PASSWORD': os.environ.get('DREAMER_DB_PASS'),
-            'HOST': 'localhost',
-            'PORT': '5432'
-        }
-    }
+# if os.environ.get('prod') == 1:
+import dj_database_url
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
