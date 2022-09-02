@@ -1,1 +1,1 @@
-web: gunicorn dreamer.wsgi --log-file-
+web: gunicorn dreamer.wsgi --log-file -
