@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><!-- End Required meta tags -->
+    <!-- Begin SEO tag -->
+    <title> Dreamer | {% block title %} {% endblock %} </title>
+    {% load static %}
+    <meta property="og:titre" content="Accueil">
+    <meta name="author" content="Joel Aholou">
+    <meta property="og:locale" content="fr_FR">
+    <meta name="description" content="application de deal et tontine chez dreamer">
+    <meta property="og:description" content="application de deal et tontine chez dreamer">
+    <meta property="og:site_name" content="dreamer - dreamer the prince">
+    <script type="application/ld+json">
+      {
+        "name": "dreamer the prince",
+        "description": "application de deal et tontine chez dreamer",
+        "author":
+        {
+          "@type": "Person",
+          "name": "Joel Aholou"
+        },
+        "@type": "WebSite",
+        "url": "",
+        "headline": "Sign In",
+        "@context": "http://schema.org"
+      }
+    </script><!-- End SEO tag -->
+    <!-- FAVICONS -->
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static 'assets/apple-touch-icon.png' %}">
+    <link rel="shortcut icon" href="{% static 'assets/favicon.ico' %}">
+    <meta name="theme-color" content="#3063A0"><!-- End FAVICONS -->
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600" rel="stylesheet"><!-- End GOOGLE FONT -->
+    <!-- BEGIN PLUGINS STYLES -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/open-iconic/font/css/open-iconic-bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/vendor/@fortawesome/fontawesome-free/css/all.min.css' %}"><!-- END PLUGINS STYLES -->
+    <link rel="stylesheet" href="{% static 'assets/vendor/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' %}"><!-- END PLUGINS STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme.min.css' %}" data-skin="default">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/theme-dark.min.css' %}" data-skin="dark">
+    <link rel="stylesheet" href="{% static 'assets/stylesheets/custom.css' %}">
+    <style>
+        .thumbnail{
+            width: 100%;
+            height: 250px;
+            -webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+            -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+            box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
+        }
+    </style>
+<!-- END THEME STYLES -->
+  </head>
+  <body>
+    <!-- .app -->
+    <div class="app">
+      <!--[if lt IE 10]>
+      <div class="page-message" role="alert">You are using an <strong>outdated</strong> browser. Please <a class="alert-link" href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</div>
+      <![endif]-->
+
+      <!-- .app-header -->
+      {% include 'includes/aside_menu.html' %}
+
+      <!-- .app-main -->
+
+        {% block content %}
+
+        {% endblock %}
+
+      <!-- end app -->
+
+    </div><!-- /.app -->
+    <!-- BEGIN BASE JS -->
+    <script>
+      var skin = localStorage.getItem('skin') || 'default';
+      var isCompact = JSON.parse(localStorage.getItem('hasCompactMenu'));
+      var disabledSkinStylesheet = document.querySelector('link[data-skin]:not([data-skin="' + skin + '"])');
+      // Disable unused skin immediately
+      disabledSkinStylesheet.setAttribute('rel', '');
+      disabledSkinStylesheet.setAttribute('disabled', true);
+      // add flag class to html immediately
+      if (isCompact == true) document.querySelector('html').classList.add('preparing-compact-menu');
+    </script>
+    <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/popper.js/umd/popper.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.min.js' %}"></script> <!-- END BASE JS -->
+    <!-- BEGIN PLUGINS JS -->
+    <script src="{% static 'assets/vendor/pace-progress/pace.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/stacked-menu/js/stacked-menu.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script> <!-- END PLUGINS JS -->
+    {% block js %} {% endblock %}
+    <script src="{% static 'assets/javascript/theme.min.js' %}"></script>
+    <script>
+        // Delai de disparition de messages
+        setTimeout(function (){
+            $('#message').fadeOut('slow');
+        }, 4000)
+    </script>
+  </body>
+</html>

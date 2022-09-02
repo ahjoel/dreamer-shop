@@ -1,0 +1,14 @@
+<!-- .page-navs -->
+<nav class="page-navs">
+
+              <div class="nav-scroller">
+                {% with url_name=request.resolver_match.url_name %}
+                <div class="nav nav-center nav-tabs">
+
+                  <a class="nav-link {% if url_name == 'product_desc' %} active {% endif %} " href="{% url 'store:product_desc' p.slug %}">Description</a>
+                  <a class="nav-link {% if url_name == 'product_detail' %} active {% endif %} " href="{% url 'store:product_detail' p.slug %}">Request Deal</a>
+
+                </div><!-- /.nav -->
+              {% endwith %}
+              </div><!-- /.nav-scroller -->
+</nav><!-- /.page-navs -->

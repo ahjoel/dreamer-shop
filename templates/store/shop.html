@@ -1,0 +1,69 @@
+{% extends 'base_store.html' %}
+{% load static %}
+
+{% block title %}
+    Shop
+{% endblock %}
+
+{% block content %}
+
+<main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+            <!-- .page-inner -->
+            <div class="page-inner">
+              <!-- .page-title-bar -->
+                  <header class="page-title-bar">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item active">
+                          <a href="{% url 'accounts:dashboard' %}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Dashboard</a>
+                        </li>
+                      </ol>
+                    </nav>
+                    <h1 class="page-title"> Shop </h1>
+                    <p class="text-muted"> Browse throught devices... </p>
+                  </header><!-- /.page-title-bar -->
+
+
+                <!-- grid row -->
+                <div class="row">
+
+                    {% for p in products %}
+                  <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <!-- .card -->
+                    <div class="card card-figure is-hoverable">
+                      <!-- .card-figure -->
+                      <figure class="figure">
+                        <img class="thumbnail" src="{{ p.pdt_img.url }}" alt="{{ p.nom }}"> <!-- .figure-caption -->
+                        <figcaption class="figure-caption">
+                          <h6 class="figure-title"> {{ p.nom }} - {{ p.model }} </h6>
+                            <p class="text-muted mb-0"> Choisissez une action à effectuer </p>
+                            <br>
+                          <p>
+                              <a href="{% url 'store:product_detail' p.slug %}" class="btn btn-primary circle">
+                                  <i class="fa fa-arrow-left ml-1"></i>
+                                  Deal
+                              </a>
+
+                              <a href="#" class="btn btn-info circle">
+                                  Tontine
+                                  <i class="fa fa-arrow-right ml-2"></i>
+                              </a>
+                          </p>
+                        </figcaption><!-- /.figure-caption -->
+                      </figure><!-- /.card-figure -->
+                    </div><!-- /.card -->
+                  </div><!-- /grid column -->
+                    {% endfor %}
+                </div><!-- /grid row -->
+
+            </div>
+          </div>
+        </div>
+
+</main>
+
+{% endblock %}

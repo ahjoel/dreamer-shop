@@ -1,0 +1,198 @@
+{% extends 'base_store.html' %}
+{% load static %}
+
+{% block title %}
+    Modification - Object Deal
+{% endblock %}
+
+{% block content %}
+
+      <main class="app-main">
+
+        <div class="wrapper">
+
+          <div class="page">
+
+
+            <!-- .page-navs -->
+            <nav class="page-navs">
+
+                          <div class="nav-scroller">
+                            {% with url_name=request.resolver_match.url_name %}
+                            <div class="nav nav-center nav-tabs">
+
+                              <a class="nav-link {% if url_name == 'update_objetdeal' %} active {% endif %} " href="{% url 'store:update_objetdeal' obj_desc.imei %}">Update Objet Deal</a>
+
+                            </div><!-- /.nav -->
+                          {% endwith %}
+                          </div><!-- /.nav-scroller -->
+            </nav><!-- /.page-navs -->
+
+            <!-- .page-inner -->
+            <div class="page-inner">
+
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{% url 'store:shop' %}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Shop</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header>
+
+
+              <div class="page-section">
+
+                <div class="row">
+
+                  <div class="col-lg-2">
+
+                  </div>
+
+
+                  <!-- grid column -->
+                  <div class="col-lg-8">
+
+                    <div class="card card-fluid">
+                      <h6 class="card-header"> Update - Phone Deal - {{ obj_desc.nom }} {{ '' }} {{ obj_desc.model }} </h6>
+                      <div class="card-body">
+
+                          {% include 'includes/messages.html' %}
+
+
+                        <div class="media mb-3">
+
+
+                          <div class="media-body pl-3">
+                            <div id="progress-avatar" class="progress progress-xs fade">
+                              <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <form method="POST" enctype="multipart/form-data" autocomplete="off" >
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ request.user.id }}" name="customer" id="customer">
+                            <input type="hidden" value="{{ obj_desc.code }}" name="code" id="code">
+                            <input type="hidden" value="{{ obj_desc.produit.id }}" name="produit" id="produit">
+
+
+                          <div class="form-row">
+
+                            <label for="input02" class="col-md-3">IMEI</label>
+
+                            <div class="col-md-9 mb-3">
+                              {{ form.imei }}
+                            </div>
+                          </div>
+
+
+                          <div class="form-row">
+
+                            <label for="input02" class="col-md-3">Phone Name</label>
+
+                            <div class="col-md-9 mb-3">
+                              {{ form.nom }}
+                            </div>
+                          </div>
+
+
+                          <div class="form-row">
+
+                            <label for="input02" class="col-md-3">Phone Model</label>
+
+                            <div class="col-md-9 mb-3">
+                              {{ form.model }}
+                            </div>
+                          </div>
+
+                          <div class="form-row">
+
+                            <label for="input02" class="col-md-3">Phone Description</label>
+
+                            <div class="col-md-9 mb-3">
+                              {{ form.description }}
+                            </div>
+                          </div>
+
+
+                          <div class="form-row">
+
+                            <label for="input01" class="col-md-3">Image Profile</label> <!-- /form column -->
+
+                            <div class="col-md-9 mb-3">
+                              <div class="custom-file">
+
+                                  {{ form.obj_img }}
+                              </div><small class="text-muted">Upload a new cover image, JPG 1200x300</small>
+                            </div>
+                          </div>
+
+
+                          <div class="form-row">
+
+                            <label for="input01" class="col-md-3">Image Avant</label> <!-- /form column -->
+
+                            <div class="col-md-9 mb-3">
+                              <div class="custom-file">
+                                {{ form.obj_img_1 }}
+                              </div><small class="text-muted">Upload a new cover image, JPG 1200x300</small>
+                            </div>
+                          </div>
+
+
+                          <div class="form-row">
+
+                            <label for="input01" class="col-md-3">Image Arrière</label> <!-- /form column -->
+
+                            <div class="col-md-9 mb-3">
+                              <div class="custom-file">
+                                {{ form.obj_img_2 }}
+                              </div><small class="text-muted">Upload a new cover image, JPG 1200x300</small>
+                            </div>
+                          </div>
+
+                          <hr>
+
+                          <div class="form-actions">
+                            <a class="btn btn-primary" href="{% url 'store:list_deal' %}">Retour</a>
+                            <button type="submit" class="btn btn-warning ml-auto">Modifier</button>
+                          </div>
+                        </form>
+
+                      </div>
+                    </div>
+
+
+                  </div>
+
+                    <div class="col-lg-2">
+
+
+
+                    </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+        <footer class="app-footer">
+
+          <div class="copyright"> Copyright © 2022. All right reserved. </div>
+        </footer>
+
+      </main>
+
+{% endblock %}
+
+
+{% block js %}
+
+
+{% endblock %}

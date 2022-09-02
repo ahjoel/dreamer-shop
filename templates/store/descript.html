@@ -1,0 +1,186 @@
+{% extends 'base_store.html' %}
+{% load static %}
+
+{% block title %}
+    Request Deal
+{% endblock %}
+
+{% block content %}
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+            {% if product %}
+                {% for p in product %}
+            {% include 'includes/nav_app.html' %}
+
+            <!-- .page-inner -->
+            <div class="page-inner">
+
+              <header class="page-title-bar">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{% url 'store:shop' %}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Shop</a>
+                    </li>
+                  </ol>
+                </nav>
+              </header><!-- /.page-title-bar -->
+
+                                <!-- .feed -->
+                  <div class="feed">
+                    <!-- .feed-post -->
+                    <div class="feed-post card">
+                      <!-- .card-header -->
+                      <div class="card-header card-header-fluid">
+                        <a href="#" class="btn-account" role="button">
+                          <div class="user-avatar user-avatar-lg">
+                            <img src="{{ p.pdt_img.url }}" alt="{{ p.nom }}">
+                          </div>
+                          <div class="account-summary">
+                            <p class="account-name"> {{ p.nom }} - {{ p.model }} </p>
+                            <p class="account-description"> {{ p.categorie }} </p>
+                          </div>
+                        </a> <!-- .dropdown -->
+
+
+
+                      </div><!-- /.card-header -->
+                      <!-- .card-body -->
+                      <div class="card-body">
+                        <p class="mb-2">
+                            {{ p.description | safe }}
+                        </p><!-- .feed-attachments -->
+
+                        <div class="pswp-gallery">
+                          <div class="feed-attachments">
+                            <div class="attachment-item">
+
+                              <!-- .card-figure -->
+                              <div class="card-figure">
+                                <!-- .card-figure -->
+                                <figure class="figure">
+                                  <!-- .figure-img -->
+                                  <div class="figure-img">
+                                    <img class="img-fluid" src="{{ p.pdt_img.url }}" alt="{{ p.nom }}">
+                                      <a href="{{ p.pdt_img.url }}" class="img-link" data-size="600x450" target="_blank">
+                                          <span class="tile tile-circle bg-danger">
+                                              <span class="oi oi-eye"></span>
+                                          </span>
+                                          <span class="img-caption d-none">
+                                              {{ p.nom }}
+                                          </span>
+                                      </a>
+                                  </div><!-- /.figure-img -->
+                                </figure><!-- /.card-figure -->
+                              </div><!-- /.card-figure -->
+                            </div>
+
+                              {% if p.pdt_img_1 %}
+                            <div class="attachment-item">
+                              <!-- .card-figure -->
+                              <div class="card-figure">
+                                <!-- .card-figure -->
+                                <figure class="figure">
+                                  <!-- .figure-img -->
+                                  <div class="figure-img">
+                                    <img class="img-fluid" src="{{ p.pdt_img_1.url }}" alt="{{ p.nom }}">
+                                      <a href="{{ p.pdt_img_1.url }}" class="img-link" data-size="600x450" target="_blank">
+                                          <span class="tile tile-circle bg-danger">
+                                              <span class="oi oi-eye"></span>
+                                          </span>
+                                          <span class="img-caption d-none">
+                                              {{ p.nom }}
+                                          </span>
+                                      </a>
+                                  </div><!-- /.figure-img -->
+                                </figure><!-- /.card-figure -->
+                              </div><!-- /.card-figure -->
+                            </div>
+                              {% endif %}
+
+                            {% if p.pdt_img_2 %}
+                              <div class="attachment-item">
+                              <!-- .card-figure -->
+                              <div class="card-figure">
+                                <!-- .card-figure -->
+                                <figure class="figure">
+                                  <!-- .figure-img -->
+                                  <div class="figure-img">
+                                    <img class="img-fluid" src="{{ p.pdt_img_2.url }}" alt="{{ p.nom }}">
+                                      <a href="{{ p.pdt_img_2.url }}" class="img-link" data-size="600x450" target="_blank">
+                                          <span class="tile tile-circle bg-danger">
+                                              <span class="oi oi-eye"></span>
+                                          </span>
+                                          <span class="img-caption d-none">
+                                              {{ p.nom }}
+                                          </span>
+                                      </a>
+                                  </div><!-- /.figure-img -->
+                                </figure><!-- /.card-figure -->
+                              </div><!-- /.card-figure -->
+                            </div>
+                            {% endif %}
+
+                          {% if p.pdt_img_3 %}
+                              <div class="attachment-item">
+                              <!-- .card-figure -->
+                              <div class="card-figure">
+                                <!-- .card-figure -->
+                                <figure class="figure">
+                                  <!-- .figure-img -->
+                                  <div class="figure-img">
+                                    <img class="img-fluid" src="{{ p.pdt_img_3.url }}" alt="{{ p.nom }}">
+                                      <a href="{{ p.pdt_img_3.url }}" class="img-link" data-size="600x450" target="_blank">
+                                          <span class="tile tile-circle bg-danger">
+                                              <span class="oi oi-eye"></span>
+                                          </span>
+                                          <span class="img-caption d-none">
+                                              {{ p.nom }}
+                                          </span>
+                                      </a>
+                                  </div><!-- /.figure-img -->
+                                </figure><!-- /.card-figure -->
+                              </div><!-- /.card-figure -->
+                            </div>
+                            {% endif %}
+
+                          </div>
+                        </div><!-- /.feed-attachments -->
+
+
+                      </div><!-- /.card-body -->
+                      <!-- .card-footer -->
+                      <div class="card-footer">
+                        <div class="card-footer-item">
+                          <button type="button" class="btn btn-reset text-nowrap text-muted"><i class="fa fa-fw fa-comment"></i> Comment</button>
+                        </div>
+                      </div><!-- /.card-footer -->
+                    </div><!-- /.feed-post -->
+                  </div><!-- /.feed -->
+
+
+            </div><!-- /.page-inner -->
+                 {% endfor %}
+             {% else %}
+                  <p>Produit indisponible :-)</p>
+              {% endif %}
+          </div>
+        </div><!-- .app-footer -->
+
+
+        <footer class="app-footer">
+
+          <div class="copyright"> Copyright © 2022. All right reserved. </div>
+        </footer>
+        <!-- /.wrapper -->
+      </main><!-- /.app-main -->
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock %}

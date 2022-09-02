@@ -1,0 +1,126 @@
+{% extends 'base_store.html' %}
+{% load static %}
+
+{% block title %}
+    Delete Deal
+{% endblock %}
+
+{% block content %}
+      <!-- .app-main -->
+      <main class="app-main">
+        <!-- .wrapper -->
+        <div class="wrapper">
+          <!-- .page -->
+          <div class="page">
+
+            <!-- .page-navs -->
+                <nav class="page-navs">
+                {% if objetdeal %}
+
+                              <div class="nav-scroller">
+                                  {% with url_name=request.resolver_match.url_name %}
+                                <div class="nav nav-center nav-tabs">
+
+                                  <a class="nav-link {% if url_name == 'list_deal' %} active {% endif %}" href="{% url 'store:list_deal' %}">List Deal</a>
+                                  <a class="nav-link {% if url_name == 'objetdeal_detail' %} active {% endif %}" href="{% url 'store:objetdeal_detail' objetdeal.imei %}">Detail Deal</a>
+                                  <a class="nav-link {% if url_name == 'delete_objetdeal' %} active {% endif %}" href="{% url 'store:delete_objetdeal' objetdeal.imei %}">Detail Deal</a>
+
+                                </div><!-- /.nav -->
+                                {% endwith %}
+
+                              </div><!-- /.nav-scroller -->
+                </nav><!-- /.page-navs -->
+
+
+                    <div class="card-body">
+
+                     <header class="page-title-bar">
+                <!-- .breadcrumb -->
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item active">
+                      <a href="{% url 'store:shop' %}"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Shop</a>
+                    </li>
+                  </ol>
+                </nav><!-- /.breadcrumb -->
+                <!-- title -->
+                <h2 class="page-title">Confirmation de suppression</h2>
+                <p class="text-muted"> </p><!-- /title -->
+              </header><!-- /.page-title-bar -->
+
+                <!-- .card -->
+                <div class="card card-fluid">
+                  <div class="card-body p-sm-5">
+
+                    <p>Voulez-vous supprimez <strong> {{ objetdeal.nom }} {{ '' }} {{ objetdeal.model }} </strong></p>
+                      {% endif %}
+
+
+                    <form method="POST">
+                    {% csrf_token %}
+
+                    <p>
+                          <a href="{% url 'store:list_deal' %}" class="btn btn-primary">
+                              Annuler
+                          </a>
+
+                         <button type="submit" class="btn btn-warning">Supprimer</button>
+                    </p>
+                        </form>
+
+                  </div>
+                </div><!-- /.card -->
+
+                   </div>
+
+
+
+          </div>
+        </div><!-- .app-footer -->
+
+
+        <footer class="app-footer">
+
+          <div class="copyright"> Copyright © 2022. All right reserved. </div>
+        </footer>
+        <!-- /.wrapper -->
+      </main><!-- /.app-main -->
+
+{% endblock %}
+
+
+{% block js %}
+    <script>
+         $(document).ready(function() {
+    var t= $('#table_id').DataTable( {
+        language: {
+            url: '{% static 'json/dataTables.french.json' %}'
+        },
+         ordering : false,
+          fixedHeader: {
+              header: true,
+              footer: true
+          },
+          "scrollX": true,
+
+        "columnDefs": [ {
+            "searchable": false,
+            "orderable": false,
+            "targets": 0
+        } ],
+        "order": [[ 1, 'asc' ]]
+    } );
+
+   t.on( 'order.dt search.dt', function () {
+        t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+            cell.innerHTML = i+1;
+        } );
+    } ).draw();
+} );
+    </script>
+    <script src="{% static 'assets/vendor/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+
+    <!-- BEGIN PAGE LEVEL JS -->
+    <script src="{% static 'assets/javascript/pages/dataTables.bootstrap.js' %}"></script>
+{% endblock %}
