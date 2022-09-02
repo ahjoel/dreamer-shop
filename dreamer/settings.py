@@ -26,7 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=True, cast=bool)
+DEBUG = True
+
+if os.getcwd() == '/app':
+    DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dreamer-shop.herokuapp.com']
 
@@ -82,16 +85,20 @@ WSGI_APPLICATION = 'dreamer.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dreamer',
-        'USER': 'postgres',
-        'PASSWORD': os.environ.get('DREAMER_DB_PASS'),
-        'HOST': 'localhost',
-        'PORT': '5432'
+if os.getcwd() == '/app':
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config()
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dreamer',
+            'USER': 'postgres',
+            'PASSWORD': os.environ.get('DREAMER_DB_PASS'),
+            'HOST': 'localhost',
+            'PORT': '5432'
+        }
     }
-}
 
 
 # Password validation
