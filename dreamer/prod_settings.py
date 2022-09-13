@@ -9,7 +9,7 @@ SECRET_KEY = config('SECRET_KEY')
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dreamer-shop.herokuapp.com']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 DATABASES['default'] = dj_database_url.config()
 
