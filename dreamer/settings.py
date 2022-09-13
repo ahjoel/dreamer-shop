@@ -23,18 +23,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-if config('prod') == 1:
-    DEBUG = False
-
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'dreamer-shop.herokuapp.com']
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -85,11 +73,6 @@ WSGI_APPLICATION = 'dreamer.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-# if os.environ.get('prod') == 1:
-import dj_database_url
-DATABASES['default'] = dj_database_url.config()
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -148,4 +131,9 @@ AUTH_USER_MODEL = 'accounts.User'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from .local_settings import *
+except ImportError:
+    from .prod_settings import *
 
