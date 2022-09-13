@@ -27,4 +27,5 @@ urlpatterns = [
     # path('', views.login_view, name='login'),
     path('accounts/', include('accounts.urls')),
     path('store/', include('store.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
