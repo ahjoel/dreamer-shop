@@ -22,7 +22,7 @@ def login_view(request):
             if 'next' in request.POST:
                 return redirect(request.POST.get('next'))
             else:
-                return redirect('accounts:dashboard')
+                return redirect('store:shop')
         else:
             messages.error(request, 'Invalid login credentials')
             return redirect('login')
@@ -53,7 +53,7 @@ def register(request):
                     if 'next' in request.POST:
                         return redirect(request.POST.get('next'))
                     else:
-                        return redirect('accounts:dashboard')
+                        return redirect('store:shop')
                     user.save()
         else:
             messages.error(request, 'Password do not match')
