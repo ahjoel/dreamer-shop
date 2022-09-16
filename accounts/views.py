@@ -25,7 +25,7 @@ def login_view(request):
                 return redirect('accounts:dashboard')
         else:
             messages.error(request, 'Invalid login credentials')
-            return redirect('accounts:login')
+            return redirect('login')
 
     return render(request, 'accounts/login.html')
 
@@ -48,7 +48,7 @@ def register(request):
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
                     auth.login(request, user)
-                    messages.success(request, 'You are now logged in.')
+                    # messages.success(request, 'You are now logged in.')
 
                     if 'next' in request.POST:
                         return redirect(request.POST.get('next'))
@@ -73,6 +73,6 @@ def dashboard(request):
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)
-        return redirect('pages:home')
-    return redirect('pages:home')
+        return redirect('login')
+    return redirect('login')
 

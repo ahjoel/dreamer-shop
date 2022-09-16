@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import upper
 from datetime import date
@@ -12,8 +13,19 @@ from store.forms import *
 def shop(request):
     products = Product.objects.filter(statut='Active')
 
+    paginator = Paginator(products, 3)
+    page = request.GET.get('page')
+
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+
     data = {
-        'products': products
+        'products': products,
+        'paginator': paginator
     }
     return render(request, 'store/shop.html', data)
 

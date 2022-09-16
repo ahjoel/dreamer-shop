@@ -17,14 +17,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from accounts import views
 from dreamer import settings
 
 app_name = 'accounts'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('pages.urls')),
-    # path('', views.login_view, name='login'),
+    # path('', include('pages.urls')),
+    path('', views.login_view, name='login'),
     path('accounts/', include('accounts.urls')),
     path('store/', include('store.urls')),
 
